@@ -1,5 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <math.h>
 using namespace std;
+
+typedef long long int ll;
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -9,20 +13,21 @@ int main(){
     cin>>t;
 
     while(t--){
-        int n,x,y;
+        ll n,x,y;
         cin>>n>>x>>y;
 
-        vector<int> v(n);
+        vector<ll> v(n);
 
-        int tot_transactions = 0;
-        for(int i = 0 ; i < n ; i++){
+        ll tot_transactions = 0;
+        for(ll i = 0 ; i < n ; i++){
             cin>>v[i];
             tot_transactions += (v[i]/x);
         }
         // cout<<tot_transactions<<endl;
-        int ans = INT_MIN;
-        for(int i = 0 ; i < n ; i++){
-            int val = v[i] + ((tot_transactions - (v[i]/x)) * y);
+        ll ans = LLONG_MIN;
+        for(ll i = 0 ; i < n ; i++){
+            ll val = v[i] + ((tot_transactions - (v[i]/x)) * y);
+            // ll val = tot_transactions - (v[i]/x);
             // cout<<val<<endl;
             ans = max(ans, val);
         }

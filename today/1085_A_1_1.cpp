@@ -24,18 +24,20 @@ int main(){
             }
         }
 
-        int mx = 0, mn = 0, i = 0;
-        //find consecutive ones
-        while(i < n){
-            int j = i;
-            while(j < n && s[j] == '1'){
-                j++;
+        int mn = 0;
+        int mx = 0;
+
+        for(int i = 0 ; i < n ; i++){
+            if(s[i] == '1'){
+                int j = i;
+                while(j < n && s[j] == '1') j++;
+                // cout<<"i and j: "<<i<<" "<<j<<endl;
+                int len = j - i;
+                mn += (((len)/2) + 1);
+                mx += len;
+                // cout<<"Mx and Mn: " << mn << " " << mx << endl;
+                i = j - 1;
             }
-            int len = j - i;
-            i = j - 1;
-            mx += len;
-            mn += (len/2) + 1;
-            i++;
         }
 
         cout<<mn<<" "<<mx<<endl;

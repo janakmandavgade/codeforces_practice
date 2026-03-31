@@ -18,23 +18,23 @@ int main()
         // int n;
         // cin>>n;
 
-        int n, m, l;
+        ll n, m, l;
         cin >> n >> m >> l;
 
-        vector<int> v(n + 1);
+        vector<ll> v(n + 1);
         v[0] = 0;
-        for (int i = 1; i <= n; i++)
+        for (ll i = 1; i <= n; i++)
             cin >> v[i];
 
         multiset<ll> s;
 
-        for (int i = 0; i < min(m, n + 1); i++)
+        for (ll i = 0; i < min(m, n + 1); i++)
             s.insert(0);
-        int mx = n + 1;
-        for (int i = 1; i <= n; i++)
+        ll mx = n + 1;
+        for (ll i = 1; i <= n; i++)
         {
             mx--;
-            for (int j = v[i - 1]; j < v[i]; j++)
+            for (ll j = v[i - 1]; j < v[i]; j++)
             {
                 s.insert((*s.begin()) + 1);
                 s.erase(s.begin());
@@ -44,7 +44,7 @@ int main()
                 s.insert(0);
         }
 
-        int ans = *(--s.end()) + l - v[n];
+        ll ans = *(--s.end()) + l - v[n];
         cout << ans << endl;
     }
 

@@ -14,23 +14,23 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
+        ll n;
         cin >> n;
 
-        vector<int> a(n), b(n);
-        for (int i = 0; i < n; i++)
+        vector<ll> a(n), b(n);
+        for (ll i = 0; i < n; i++)
             cin >> a[i];
-        for (int i = 0; i < n; i++)
+        for (ll i = 0; i < n; i++)
             cin >> b[i];
 
-        int mx = 0;
-        int mn = 0;
-        int ans = INT_MIN;
+        ll mx = 0;
+        ll mn = 0;
+        // ll ans = LLONG_MIN;
 
-        for (int i = 0; i < n; i++)
+        for (ll i = 0; i < n; i++)
         {
-            int new_mx = max(mx - a[i], b[i] - mn);
-            int new_mn = min(mn - a[i], b[i] - mx); // uses old mx
+            ll new_mx = max(mx - a[i], b[i] - mn);
+            ll new_mn = min(mn - a[i], b[i] - mx); // uses old mx
             mx = new_mx;
             mn = new_mn;
         }

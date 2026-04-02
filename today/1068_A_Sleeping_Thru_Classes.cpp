@@ -19,16 +19,16 @@ int main(){
         string s;
         cin>>s;
         
-        int i = 0;
+        // int i = 0;
         int cnt = 0;
-        while(i < n){
+        int last = INT_MIN;
+        for(int i = 0 ; i < n ; i++){
             if(s[i] == '1'){
-                i += (k+1);
-                // i = min(i, n);
-                if(i >= n) break;
-            }else if(i < n && s[i] == '0'){
+                last = i;
+            }
+
+            if((i > last + k && s[i] == '0')){
                 cnt++;
-                i++;
             }
         }
 

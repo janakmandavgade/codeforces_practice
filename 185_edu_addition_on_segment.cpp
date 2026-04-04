@@ -10,23 +10,23 @@ typedef long long int ll;
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int t;
+    ll t;
     cin>>t;
     while(t--){
-        int n;
+        ll n;
         cin>>n;
         
-        vector<int> v(n);
-        int sum = 0;
-        int mx = 0;
-        for(int i = 0 ; i < n ; i++) {
+        vector<ll> v(n);
+        ll sum = 0;
+        ll mx = 0;
+        for(ll i = 0 ; i < n ; i++) {
             cin>>v[i];
             sum += v[i];
             if(v[i] > 0) mx++;
         }
 
         bool val_found = false;
-        for(int i = mx ; i >= 0 ; i--){
+        for(ll i = mx ; i >= 0 ; i--){
             if(sum - i >= n - 1){
                 cout<<i<<endl;
                 val_found = true;

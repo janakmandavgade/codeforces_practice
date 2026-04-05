@@ -35,8 +35,11 @@ int main(){
                 break;
             }
         }
-        len = max(i+1, len);
-        cout<<"Len is: " << len <<endl;
+
+        len = max(i, len);
+        
+        // cout<<"Forward Len is : " << len <<endl;
+        
         i = n-1;
         while (i >= 0){
             if(i - 1 >= 0 && s[i] == '*' && s[i-1] == '*'){
@@ -47,7 +50,13 @@ int main(){
                 break;
             }
         }
-        len = max(len, n - i);
+        len = max(len, n - i - 1);
+
+        // cout<<"Backward Len is: "<< len << endl;
+
+        len = (len == 0) ? -1 : len;
+
+        cout<< len <<endl;
 
     }
 

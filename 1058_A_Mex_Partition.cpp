@@ -19,20 +19,25 @@ int main(){
         vector<int> v(n);
         for(int i = 0 ; i < n ; i++) cin>> v[i];
 
+        sort(v.begin(), v.end());
+
         bool isBroken = false;
         int i;
+        int changes = 0;
+        int val = 0;
         for(i = 0 ; i < n ; i++){
             // cout<<i<< " " << v[i] << endl;
-            if(i != v[i]){
-                cout<<i<<endl;
-                isBroken = true;
-                break;
+            if(v[i] != val) break;
+            while(i < n && v[i] == val){
+                i++;
             }
+            val++;
+            i--;
         }
         // cout<<"After for:" << i << endl; 
-        if(!isBroken){
-            cout<<i<<endl;
-        }
+        // if(!isBroken){
+            cout<<val<<endl;
+        // }
     }
 
     return 0;

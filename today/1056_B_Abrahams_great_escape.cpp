@@ -58,7 +58,7 @@ int main()
         ll n, k;
         cin >> n >> k;
 
-        if (k == 1)
+        if (k == n * n - 1)
         {
             cout << "NO" << endl;
             continue;
@@ -66,6 +66,7 @@ int main()
 
         // vector<vector<char>> v(n, vector<char>(n, 'Z'));
         int cnt = 0;
+        cout<<"YES"<<endl;
         for (int i = 0; i < n; i++)
         {
             string s = "";

@@ -3,7 +3,6 @@
 #include <unordered_map>
 #include <algorithm>
 #include <string>
-#include <cmath>
 using namespace std;
 
 typedef long long int ll;
@@ -19,21 +18,6 @@ void printVec(vector<t> &v)
 {
     for (ll i = 0; i < v.size(); i++)
         cout << v[i] << " ";
-    cout << endl;
-    return;
-}
-
-template <typename t>
-void print2dVec(vector<vector<t>> &v)
-{
-    for (ll i = 0; i < v.size(); i++)
-    {
-        for (ll j = 0; j < v[i].size(); j++)
-        {
-            cout << v[i][j] << " ";
-        }
-        cout << endl;
-    }
     cout << endl;
     return;
 }
@@ -60,15 +44,6 @@ void printVec(vector<ll> &v)
     return;
 }
 
-bool CheckIfF(int i, int j, vector<ll> &row, vector<ll> &col)
-{
-    if (i < col[j] || j < row[i])
-    {
-        return true;
-    }
-    return false;
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -78,86 +53,58 @@ int main()
     cin >> n >> m;
 
     vector<ll> row(n), col(m);
+
     inputVec(row, n);
     inputVec(col, m);
 
-    // Step 1: check conflicts
-    for (int i = 0; i < n; i++)
+    vector<vector<ll>> v(n, vector<ll>(m, -1));
+    for (ll i = 0; i < n; i++)
     {
-        if (row[i] < m && col[row[i]] > i)
+        for (ll j = 0; j < row[i]; j++)
         {
-            cout << 0;
-            return 0;
+            v[i][j] = 1;
+        }
+        if (row[i] < m)
+            v[i][row[i]] = 0;
+    }
+
+    for (ll i = 0; i < m; i++)
+    {
+        for (ll j = 0; j < col[i]; j++)
+        {
+            if (v[j][i] == 0)
+            {
+                cout << 0 << endl;
+                return 0;
+            }
+            v[j][i] = 1;
+        }
+        // Only set EMPTY if it falls inside the grid boundaries
+        if (col[i] < n)
+        {
+            // Check contradiction: if row marked it FULL, but col wants it EMPTY
+            if (v[col[i]][i] == 1)
+            {
+                cout << 0 << "\n";
+                return 0;
+            }
+            v[col[i]][i] = 0;
         }
     }
 
-    for (int j = 0; j < m; j++)
-    {
-        if (col[j] < n && row[col[j]] > j)
-        {
-            cout << 0;
-            return 0;
-        }
-    }
-
-    ll cnt = 0;
+    ll cnt = 1;
     for (ll i = 0; i < n; i++)
     {
         for (ll j = 0; j < m; j++)
         {
-            // cout << "i:" << i << " j:" << j << endl;
-
-            // if (row[i] == 0 && col[j] == 0)
-            // {
-            //     // cout << "E" << " " << endl;
-            //     continue;
-            // }
-            // else if (i < col[j] || j < row[i])
-            // {
-            //     // cout << "F" << " " << endl;
-            //     continue;
-            // }
-            // // if (i == 3 && j == 2)
-            // // {
-            // // cout << (((i - 1) < col[j] || j < row[i]) || (i < col[j] || (j - 1) < row[i])) << endl;
-            // // }
-            // else if (
-
-            //     (((i - 1) >= 0 && (j - 1) >= 0) &&
-            //      ((i - 1) < col[j] || j < row[i])) ||
-            //     (i < col[j] || (j - 1) < row[i]))
-
-            // {
-            //     // cout << "X" << " " << endl;
-            //     continue;
-            // }
-            // else
-            //     cnt++;
-
-            if (j > row[i] && i > col[j])
-                cnt++;
+            if (v[i][j] == -1)
+            {
+                cnt = cnt * 2 % (1000000007);
+            }
         }
-        // cout << endl;
     }
 
-    // cout << pow(2, (int)cnt) % (1e9 + 7) << endl;
-
-    if (cnt != 0)
-    {
-        long long ans = 1;
-        long long MOD = 1000000007LL;
-
-        for (int i = 0; i < cnt; i++)
-        {
-            ans = (ans * 2) % MOD;
-        }
-
-        cout << ans << endl;
-    }
-    else
-    {
-        cout << cnt << endl;
-    }
+    cout << cnt << endl;
 
     return 0;
 }

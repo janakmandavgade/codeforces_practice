@@ -130,7 +130,7 @@ int main()
 
     // cout << "Vertices:" << n << endl;
 
-    cout << ((n % 2 == 1) ? -1 : ans) << endl;
+    cout << ((n % 2 == 1) ? -1 : ans) << endl;  
 
     return 0;
 }
